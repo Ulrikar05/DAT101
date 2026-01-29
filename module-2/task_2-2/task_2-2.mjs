@@ -11,25 +11,18 @@ printOut(newLine);
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 const millimeters = 25000 + 340;
 const inchPrMillimeters = 25.4;
-let sumPart2 = millimeters / inchPrMillimeters;
-sumPart2 = sumPart2.toFixed(2);
+let sumPart2 = (millimeters / inchPrMillimeters).toFixed(2);
 printOut(`25 metres and 34 centimeters is ${sumPart2} inches`);
 printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
-const part3Days = 3;
-const part3Hours = 14;
-const part3Minutes = 14;
-const part3Seconds = 34;
-
+const part3Days = 3, part3Hours = 14, part3Minutes = 14, part3Seconds = 34;
 let part3Answer =
   (part3Days * 24 * 60) +
   (part3Hours * 60) +
   part3Minutes +
   (part3Seconds / 60);
-
-part3Answer = part3Answer.toFixed(2);
-printOut("3 days, 12 hours, 14 minutes, and 45 seconds is " + part3Answer + " minutes");
+printOut("3 days, 12 hours, 14 minutes, and 45 seconds is " + part3Answer.toFixed(2) + " minutes");
 printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
@@ -40,8 +33,7 @@ part4Rest = (part4Rest - part4Days) * 24;
 const part4Hours = Math.floor(part4Rest);
 part4Rest = (part4Rest - part4Hours) * 60;
 const part4Minute = Math.floor(part4Rest);
-part4Rest = (part4Rest - part4Minute) * 60;
-const part4Seconds = Math.floor(part4Rest);
+const part4Seconds = Math.floor((part4Rest - part4Minute) * 60);
 
 printOut(
   "6,322.52 minutes is " +
@@ -57,7 +49,6 @@ const NOKRate = 76 / 8.6;
 let USD = 54;
 let NOK = USD * NOKRate;
 printOut("USD -> NOK = " + NOK.toFixed(2));
-
 const USDRate = 8.6 / 76;
 USD = NOK * USDRate;
 printOut("NOK -> USD = " + USD.toFixed(2));
