@@ -1,187 +1,158 @@
 "use strict";
 import { printOut, newLine } from "../../common/script/utils.mjs";
 
-printOut("=== Task 3.2 – Loops ===");
+/* Part 1 */
+let textPart1Line1 = "";
+let textPart1Line2 = "";
+for (let i = 1, j = 10; i <= 10; i++, j--) {
+  textPart1Line1 += " " + i;
+  textPart1Line2 += " " + j;
+}
+printOut(textPart1Line1);
+printOut(textPart1Line2);
 printOut(newLine);
 
-/* ---------------- Part 1: Counting up and down ---------------- */
-printOut("--- Part 1: Counting ---");
-
-let up = "";
-let down = "";
-
-for (let i = 1; i <= 10; i++) {
-  up += i + " ";
+/* Part 2 */
+const part1GuessNumber = 45;
+let part1Random = Math.floor(Math.random() * 60) + 1;
+while (part1Random !== part1GuessNumber) {
+  part1Random = Math.floor(Math.random() * 60) + 1;
 }
-
-for (let i = 10; i >= 1; i--) {
-  down += i + " ";
-}
-
-printOut(up);
-printOut(down);
+printOut("Correct guess: " + part1Random);
 printOut(newLine);
 
-/* ---------------- Part 2: Number Guessing Game ---------------- */
-printOut("--- Part 2: Guessing Game ---");
+/* Part 3 */
+const part3Time = Date.now();
+const part3GuessNumber = 654321;
+let part3Random;
+let part3Count = 0;
+do {
+  part3Random = Math.floor(Math.random() * 1000000) + 1;
+  part3Count++;
+} while (part3Random !== part3GuessNumber);
 
-const secretNumber = 45;
-let guess;
-let attempts = 0;
-
-while (guess !== secretNumber) {
-  guess = Math.floor(Math.random() * 60) + 1;
-  attempts++;
-}
-
-printOut("Guessed number: " + guess);
-printOut("Number of attempts: " + attempts);
+printOut("Guesses: " + part3Count);
+printOut("Time (ms): " + (Date.now() - part3Time));
 printOut(newLine);
 
-/* ---------------- Part 3: Guessing Game Level Up ---------------- */
-printOut("--- Part 3: Guessing Game (1 to 1 000 000) ---");
-
-const secretBigNumber = 123456; // valgfritt tall mellom 1 og 1 000 000
-let bigGuess;
-let bigAttempts = 0;
-
-const startTime = Date.now();
-
-while (bigGuess !== secretBigNumber) {
-  bigGuess = Math.floor(Math.random() * 1_000_000) + 1;
-  bigAttempts++;
-}
-
-const endTime = Date.now();
-const timeUsed = endTime - startTime;
-
-printOut("Guessed number: " + bigGuess);
-printOut("Number of attempts: " + bigAttempts);
-printOut("Time used (ms): " + timeUsed);
-printOut(newLine);
-
-/* ---------------- Part 4: Prime Number Hunter ---------------- */
-printOut("--- Part 4: Prime Numbers (< 200) ---");
-
-for (let number = 2; number < 200; number++) {
+/* Part 4 */
+let textPart4Primes = "";
+for (let i = 2; i < 200; i++) {
+  let j = i - 1;
   let isPrime = true;
-  let divisor = 2;
-
-  while (divisor <= Math.sqrt(number)) {
-    if (number % divisor === 0) {
-      isPrime = false;
-      break;
-    }
-    divisor++;
+  while (j > 1 && isPrime) {
+    isPrime = i % j !== 0;
+    j--;
   }
-
-  if (isPrime) {
-    printOut(number);
-  }
+  if (isPrime) textPart4Primes += " " + i;
 }
-
+printOut(textPart4Primes);
 printOut(newLine);
 
-/* ---------------- Part 5: Nested Loops & Patterns ---------------- */
-printOut("--- Part 5: Nested Loops Pattern ---");
-
+/* Part 5 */
+let textPart5 = "";
 for (let row = 1; row <= 7; row++) {
   let line = "";
-
   for (let col = 1; col <= 9; col++) {
     line += "K" + col + "R" + row + " ";
   }
-
-  printOut(line.trim());
+  textPart5 += line + newLine;
 }
-
+printOut(textPart5);
 printOut(newLine);
 
-/* ---------------- Part 6: Grade Simulator ---------------- */
-printOut("--- Part 6: Grade Simulator ---");
+/* Part 6 */
+const students = 5;
+let grade1 = (Math.ceil(Math.random() * 236) / 236) * 100;
+let grade2 = (Math.ceil(Math.random() * 236) / 236) * 100;
+let grade3 = (Math.ceil(Math.random() * 236) / 236) * 100;
+let grade4 = (Math.ceil(Math.random() * 236) / 236) * 100;
+let grade5 = (Math.ceil(Math.random() * 236) / 236) * 100;
 
-for (let i = 1; i <= 5; i++) {
-  const points = Math.floor(Math.random() * 236) + 1;
-  const percent = (points / 236) * 100;
+function printGrade(n, g) {
   let grade;
-
-  if (percent >= 89) {
-    grade = "A";
-  } else if (percent >= 77) {
-    grade = "B";
-  } else if (percent >= 65) {
-    grade = "C";
-  } else if (percent >= 53) {
-    grade = "D";
-  } else if (percent >= 41) {
-    grade = "E";
-  } else {
-    grade = "F";
-  }
-
-  printOut(
-    "Student " + i +
-    ": " + points + " points (" +
-    percent.toFixed(1) + "%) → Grade " + grade
-  );
+  if (g >= 89) grade = "A";
+  else if (g >= 77) grade = "B";
+  else if (g >= 65) grade = "C";
+  else if (g >= 53) grade = "D";
+  else if (g >= 41) grade = "E";
+  else grade = "F";
+  printOut(`Student ${n}: ${g.toFixed(2)}% - ${grade}`);
 }
 
+printGrade(1, grade1);
+printGrade(2, grade2);
+printGrade(3, grade3);
+printGrade(4, grade4);
+printGrade(5, grade5);
 printOut(newLine);
 
-/* ---------------- Part 7: Dice Rolling Extravaganza ---------------- */
-printOut("--- Part 7: Dice Rolling Extravaganza ---");
+/* Part 7 */
+const solveWithStrings = true;
 
-function rollDice() {
-  return Math.floor(Math.random() * 6) + 1;
+function matchNumber(a, b, c, d, e, f, n) {
+  return [a, b, c, d, e, f].filter(x => x === n).length;
 }
 
-function countDice(dice) {
-  const counts = {};
-  for (const d of dice) {
-    counts[d] = (counts[d] || 0) + 1;
+function matchString(str, n) {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (parseInt(str[i]) === n) count++;
   }
-  return Object.values(counts);
+  return count;
 }
 
-/* Full straight: 1 2 3 4 5 6 */
-let straightAttempts = 0;
-let dice;
+let throws = 0;
+let fullStraight = false;
+let yahtzee = false;
+let tower = false;
+let threePairs = false;
 
 do {
-  dice = [];
-  for (let i = 0; i < 6; i++) dice.push(rollDice());
-  straightAttempts++;
-} while (![1,2,3,4,5,6].every(n => dice.includes(n)));
+  const d1 = Math.ceil(Math.random() * 6);
+  const d2 = Math.ceil(Math.random() * 6);
+  const d3 = Math.ceil(Math.random() * 6);
+  const d4 = Math.ceil(Math.random() * 6);
+  const d5 = Math.ceil(Math.random() * 6);
+  const d6 = Math.ceil(Math.random() * 6);
+  throws++;
 
-printOut("Full straight after " + straightAttempts + " throws");
+  let c1, c2, c3, c4, c5, c6;
+  if (solveWithStrings) {
+    const s = "" + d1 + d2 + d3 + d4 + d5 + d6;
+    c1 = matchString(s, 1);
+    c2 = matchString(s, 2);
+    c3 = matchString(s, 3);
+    c4 = matchString(s, 4);
+    c5 = matchString(s, 5);
+    c6 = matchString(s, 6);
+  } else {
+    c1 = matchNumber(d1, d2, d3, d4, d5, d6, 1);
+    c2 = matchNumber(d1, d2, d3, d4, d5, d6, 2);
+    c3 = matchNumber(d1, d2, d3, d4, d5, d6, 3);
+    c4 = matchNumber(d1, d2, d3, d4, d5, d6, 4);
+    c5 = matchNumber(d1, d2, d3, d4, d5, d6, 5);
+    c6 = matchNumber(d1, d2, d3, d4, d5, d6, 6);
+  }
 
-/* 3 pairs */
-let pairAttempts = 0;
-do {
-  dice = [];
-  for (let i = 0; i < 6; i++) dice.push(rollDice());
-  pairAttempts++;
-} while (countDice(dice).filter(c => c === 2).length !== 3);
+  const counts = "" + c1 + c2 + c3 + c4 + c5 + c6;
+  if (!fullStraight && matchString(counts, 1) === 6) {
+    fullStraight = true;
+    printOut(`Full straight (${throws})`);
+  }
+  if (!yahtzee && matchString(counts, 6) === 1) {
+    yahtzee = true;
+    printOut(`Yahtzee (${throws})`);
+  }
+  if (!tower && matchString(counts, 4) === 1 && matchString(counts, 2) === 1) {
+    tower = true;
+    printOut(`Tower (${throws})`);
+  }
+  if (!threePairs && matchString(counts, 2) === 3) {
+    threePairs = true;
+    printOut(`Three pairs (${throws})`);
+  }
 
-printOut("3 pairs after " + pairAttempts + " throws");
+} while (!fullStraight || !yahtzee || !tower || !threePairs);
 
-/* Tower: 2 of a kind + 4 of a kind */
-let towerAttempts = 0;
-do {
-  dice = [];
-  for (let i = 0; i < 6; i++) dice.push(rollDice());
-  towerAttempts++;
-} while (!(countDice(dice).includes(4) && countDice(dice).includes(2)));
-
-printOut("Tower (2 + 4) after " + towerAttempts + " throws");
-
-/* Yahtzee: all the same */
-let yahtzeeAttempts = 0;
-do {
-  dice = [];
-  for (let i = 0; i < 6; i++) dice.push(rollDice());
-  yahtzeeAttempts++;
-} while (!countDice(dice).includes(6));
-
-printOut("Yahtzee after " + yahtzeeAttempts + " throws");
 printOut(newLine);
